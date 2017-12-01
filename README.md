@@ -1,2 +1,2 @@
 # database
-i donnot konw what to write
+i don't konw what to write
