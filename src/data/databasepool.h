@@ -7,11 +7,6 @@
 class DatabasePool
 {
 public:
-
-
-private:
-    DatabasePool();
-
     DatabasePool *getInstance();
 
     void setSize(int count);
@@ -19,6 +14,11 @@ private:
     Database *getDatabase();
 
     void release(Database *database);
+    void destroy();
+
+private:
+    DatabasePool(); 
+    ~DatabasePool();
 
 
 

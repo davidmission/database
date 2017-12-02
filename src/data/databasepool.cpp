@@ -9,6 +9,11 @@ DatabasePool::DatabasePool(): m_maxCount(2)
     createDatabase();
 }
 
+DatabasePool::~DatabasePool()
+{
+
+}
+
 DatabasePool *DatabasePool::getInstance()
 {
     if(m_instance == NULL)
@@ -51,6 +56,23 @@ Database *DatabasePool::getDatabase()
 void DatabasePool::release(Database *database)
 {
     m_unused << database;
+}
+
+void DatabasePool::destroy()
+{
+    if(m_instance)
+    {
+        for(int i = m_databases.size() - 1; i >= 0; --i)
+        {
+            delete m_databases[i];
+        }
+
+        m_databases.clear();
+        m_unused.clear();
+
+        delete m_instance;
+        m_instance = NULL;
+    }
 }
 
 void DatabasePool::createDatabase()
